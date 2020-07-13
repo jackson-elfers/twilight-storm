@@ -43,6 +43,7 @@ _id binary(16) not null,
 owner_id binary(16) not null,
 created_at datetime not null,
 updated_at datetime not null,
+url_title varchar(1000),
 first_name varchar(255),
 last_name varchar(255),
 city varchar(255),
@@ -67,6 +68,7 @@ _id binary(16) not null,
 owner_id binary(16) not null,
 created_at datetime not null,
 updated_at datetime not null,
+url_title varchar(1000),
 city varchar(255),
 state varchar(255),
 street varchar(255),
@@ -93,4 +95,52 @@ storage_name varchar(255) not null,
 primary key (_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
+```
+
+## routes
+
+```
+# client
+
+home: /
+profile: /profile/:url_title
+update profile: /profile/edit/:url_title
+upload resume: /upload/resume/:url_title
+job create: /job/create
+job update: /job/update/:url_title
+job delete: /job/delete/:url_title
+search profile: /search/profile/:index/:search_query
+search job: /search/job/:index/:search_query
+admin: /admin
+
+# user
+
+create: POST /api/user/create
+read: GET /api/user/read/username
+readSingleId: GET /api/user/read/single/:_id
+updateUsername: PUT /api/user/update/username (secured)
+updatePassword: PUT /api/user/update/password (secured)
+remove: DELETE /api/user/delete (secured)
+
+# user_profile
+
+update: PUT /api/profile/update
+search: GET /api/profile/search/:index/:offset/:search_query
+
+# job_profile
+
+create: POST /api/job/create
+read: GET /api/job/read/:url_title
+readByOwnerId: GET /api/job/read/owner/:owner_id
+update: PUT /api/job/update/:url_title
+delete: DELETE /api/job/delete/:url_title
+search: GET /api/job/search/:index/:offset/:search_query
+
+# files
+
+create: POST /api/files/create
+read: GET /api/files/read/:_id
+readByOwnerId: GET /api/files/read/owner/:owner_id
+update: PUT /api/files/update/:_id
+delete: DELETE /api/files/delete/:_id
 ```
