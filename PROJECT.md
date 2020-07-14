@@ -86,6 +86,7 @@ on delete cascade
 
 create table if not exists files(
 _id binary(16) not null,
+parent_id binary(16) not null,
 owner_id binary(16) not null,
 created_at datetime not null,
 updated_at datetime not null,
@@ -124,23 +125,26 @@ remove: DELETE /api/user/delete (secured)
 
 # user_profile
 
-update: PUT /api/profile/update
+update: PUT /api/profile/update (secured)
 search: GET /api/profile/search/:index/:offset/:search_query
 
 # job_profile
 
-create: POST /api/job/create
+create: POST /api/job/create (secured)
 read: GET /api/job/read/:url_title
 readByOwnerId: GET /api/job/read/owner/:owner_id
-update: PUT /api/job/update/:url_title
-delete: DELETE /api/job/delete/:url_title
+update: PUT /api/job/update (secured)
+remove: DELETE /api/job/delete (secured)
 search: GET /api/job/search/:index/:offset/:search_query
 
 # files
 
-create: POST /api/files/create
+uploadResume: POST /api/files/upload/resume (secured)
 read: GET /api/files/read/:_id
-readByOwnerId: GET /api/files/read/owner/:owner_id
-update: PUT /api/files/update/:_id
-delete: DELETE /api/files/delete/:_id
+readByParentId: GET /api/files/read/parent_id/:parent_id
+remove: DELETE /api/files/delete (secured)
+
+(Internal Services)
+removeByParentId:
+removeByUserId:
 ```
