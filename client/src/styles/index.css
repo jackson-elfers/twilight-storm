@@ -1,0 +1,85 @@
+@import "light.css";
+
+body {
+  max-width: 1000px;
+  background-image: linear-gradient(to right, rgb(22, 132, 184), rgb(52, 177, 235), rgb(22, 132, 184));
+}
+
+p {
+  color: white;
+}
+
+h1 {
+  color: white;
+}
+
+h2 {
+  color: white;
+}
+
+h3 {
+  color: white;
+}
+
+h4 {
+  color: white;
+}
+
+input {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+select {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+textarea {
+  height: 125px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+button {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+img {
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+a:link {
+  text-decoration: none;
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.box {
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (max-width: 600px) {
+  img {
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
