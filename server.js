@@ -13,6 +13,10 @@ async function main() {
   await utils.db.ready();
   // seed database models
   await db.models.user();
+  await db.models.ticket();
+  await db.models.user_profile();
+  await db.models.job_profile();
+  await db.models.file();
   console.log("database: connected");
   // connect sockets
   sockets(server);

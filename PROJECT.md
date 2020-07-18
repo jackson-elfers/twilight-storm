@@ -69,10 +69,14 @@ owner_id binary(16) not null,
 created_at datetime not null,
 updated_at datetime not null,
 url_title varchar(1000),
+first_name varchar(255),
+last_name varchar(255),
 city varchar(255),
 state varchar(255),
 street varchar(255),
 zip varchar(255),
+work_phone varchar(255),
+work_email varchar(255),
 title varchar(255),
 summary text,
 keywords varchar(1000),
@@ -84,7 +88,7 @@ on delete cascade
 
 (file)
 
-create table if not exists files(
+create table if not exists file(
 _id binary(16) not null,
 parent_id binary(16) not null,
 owner_id binary(16) not null,
@@ -121,14 +125,14 @@ uuid_to_bin(?),
 uuid_to_bin(?),
 current_timestamp(),
 current_timestamp(),
-current_timestamp(),
+?,
 ?
 );
 
 (read)
 
 select
-${columns}
+${this._columns}
 from ticket
 where owner_id = uuid_to_bin(?) and role = ?;
 
@@ -144,17 +148,17 @@ bin_to_uuid(_id) _id,
 bin_to_uuid(owner_id) owner_id,
 created_at,
 updated_at,
-url_title
-first_name
-last_name
-city
-state
-street
-zip
-work_phone
-work_email
-title
-summary
+url_title,
+first_name,
+last_name,
+city,
+state,
+street,
+zip,
+work_phone,
+work_email,
+title,
+summary,
 keywords
 
 (create)
@@ -182,7 +186,7 @@ current_timestamp(),
 (read)
 
 select
-${columns}
+${this._columns}
 from user_profile
 where url_title = ?;
 
@@ -207,7 +211,7 @@ where owner_id = uuid_to_bin(?) and _id = uuid_to_bin(?);
 (search)
 
 select
-${columns}
+${this._columns}
 from user_profile
 where first_name = %?% or last_name = %?% or city = %?% or state = %?% or street = %?% or zip = %?% or title = %?% or keywords = %?%
 order by created_at desc limit ${index * offset}, ${offset};
@@ -221,13 +225,17 @@ bin_to_uuid(_id) _id,
 bin_to_uuid(owner_id) owner_id,
 created_at,
 updated_at,
-url_title
-city
-state
-street
-zip
-title
-summary
+url_title,
+first_name,
+last_name,
+city,
+state,
+street,
+zip,
+work_phone,
+work_email,
+title,
+summary,
 keywords
 
 (create)
@@ -253,14 +261,14 @@ current_timestamp(),
 (read)
 
 select
-${columns}
+${this._columns}
 from job_profile
 where url_title = ?;
 
 (readByOwnerId)
 
 select
-${columns}
+${this._columns}
 from job_profile
 where owner_id = uuid_to_bin(?);
 
@@ -287,9 +295,9 @@ delete from job_profile where owner_id = uuid_to_bin(?) and _id = uuid_to_bin(?)
 (search)
 
 select
-${columns}
+${this._columns}
 from user_profile
-where city = %?% or state = %?% or street = %?% or zip = %?% or title = %?% or keywords = %?%
+where first_name = %?% or last_name = %?% or city = %?% or state = %?% or street = %?% or zip = %?% or title = %?% or keywords = %?%
 order by created_at desc limit ${index * offset}, ${offset};
 
 ```
@@ -323,7 +331,7 @@ current_timestamp(),
 (readByParentId)
 
 select
-${columns}
+${this._columns}
 from file
 where parent_id = uuid_to_bin(?);
 
