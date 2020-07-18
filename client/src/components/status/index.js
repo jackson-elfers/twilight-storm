@@ -12,7 +12,7 @@ function Nav(props) {
           <button style={nav}>menu</button>
         </Link>
         <Link to={routes.Dashboard}>
-          <button style={nav}>{`hi ${props.user.username}`}</button>
+          <button style={nav}>{`hi ${props.user.username.slice(0, 12)}...`}</button>
         </Link>
       </div>
     );

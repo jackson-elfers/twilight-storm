@@ -100,6 +100,8 @@ primary key (_id)
 
 ## sql routes
 
+### user ...
+
 ### ticket
 
 ```
@@ -207,7 +209,7 @@ where owner_id = uuid_to_bin(?) and _id = uuid_to_bin(?);
 select
 ${columns}
 from user_profile
-where first_name = %?% or last_name = %?% or city = %?% or state = %?% or street = %?% or zip = %?% or title = %?% or keywords = %?%;
+where first_name = %?% or last_name = %?% or city = %?% or state = %?% or street = %?% or zip = %?% or title = %?% or keywords = %?%
 order by created_at desc limit ${index * offset}, ${offset};
 
 ```
@@ -287,7 +289,7 @@ delete from job_profile where owner_id = uuid_to_bin(?) and _id = uuid_to_bin(?)
 select
 ${columns}
 from user_profile
-where city = %?% or state = %?% or street = %?% or zip = %?% or title = %?% or keywords = %?%;
+where city = %?% or state = %?% or street = %?% or zip = %?% or title = %?% or keywords = %?%
 order by created_at desc limit ${index * offset}, ${offset};
 
 ```
@@ -345,16 +347,24 @@ job update: /job/update/:url_title
 job delete: /job/delete/:url_title
 search profile: /search/profile/:index/:search_query
 search job: /search/job/:index/:search_query
-admin: /admin
+admin: /admin/login
 
 (user)
 
-create: POST /api/user/create
-read: GET /api/user/read/username
-readSingleId: GET /api/user/read/single/:_id
-updateUsername: PUT /api/user/update/username (secured)
-updatePassword: PUT /api/user/update/password (secured)
-remove: DELETE /api/user/delete (secured)
+login: POST /api/user/login
+logout: GET /api/user/logout
+readSingleId: GET /api/user/read/id
+usernameExists: GET /api/user/exists/username
+info: GET /api/user/info
+register: POST /api/user/register
+updateUsername: PUT /api/user/update/username
+updatePassword: PUT /api/user/update/password
+unregister: DELETE /api/user/unregister
+
+(admin)
+
+login: POST /api/admin/login
+validate: GET /api/admin/validate
 
 (user_profile)
 
@@ -378,7 +388,7 @@ read: GET /api/file/read/:storage_name
 readByParentId: GET /api/file/read/parent_id/:parent_id
 remove: DELETE /api/file/delete (secured)
 
-(Internal Services)
+(internal services)
 
 removeByParentId:
 removeByUserId:

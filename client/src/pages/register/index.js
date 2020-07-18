@@ -18,7 +18,7 @@ function Main(props) {
       recaptcha_token: recaptcha
     };
     try {
-      errors.user.register(data);
+      await errors.user.register(data);
       if (
         (await axios.get(`${process.env.REACT_APP_API}${api.user.usernameExists}/${data.username}`)).data.data
           .length !== 0
@@ -66,7 +66,7 @@ function Main(props) {
       <h1>Register</h1>
       <hr />
       <form id="formOne" onSubmit={register}>
-        <input type="text" name="username" placeholder="username" />
+        <input type="text" name="username" placeholder="email" />
         <input type="password" name="password" placeholder="password" />
         <input type="password" name="confirm" placeholder="password confirm" />
         <input type="submit" value="register" />

@@ -12,7 +12,7 @@ function Main(props) {
     const form = document.getElementById("formOne");
     const data = { username: form.username.value };
     try {
-      errors.user.updateUsername(data);
+      await errors.user.updateUsername(data);
       if (
         (await axios.get(`${process.env.REACT_APP_API}${api.user.usernameExists}/${data.username}`)).data.data
           .length !== 0
@@ -37,7 +37,7 @@ function Main(props) {
       <h1>Update Username</h1>
       <hr />
       <form id="formOne" onSubmit={updateUsername}>
-        <input type="text" name="username" placeholder="username" />
+        <input type="text" name="username" placeholder="email" />
         <input type="submit" value="update" />
       </form>
     </div>
