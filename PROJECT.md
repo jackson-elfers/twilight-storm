@@ -335,6 +335,13 @@ ${this._columns}
 from file
 where parent_id = uuid_to_bin(?);
 
+(readByOwnerId)
+
+select
+${this._columns}
+from file
+where owner_id = uuid_to_bin(?);
+
 (remove)
 
 delete from file where owner_id = uuid_to_bin(?) and storage_name = ?;

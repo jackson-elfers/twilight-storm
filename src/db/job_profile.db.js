@@ -25,7 +25,7 @@ keywords
   
   async create(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    await this.method.errors.user_profile.create(data);
+    await this.method.errors.job_profile.create(data);
 
     const short_title = data.title
       .split(" ")
@@ -35,7 +35,7 @@ keywords
     const url_title = `${this.method.urlify(short_title)}-${this.method.shortid.generate()}`;
 
     const query = `
-insert into user_profile
+insert into job_profile
 values(
 uuid_to_bin(?),
 uuid_to_bin(?),
@@ -63,11 +63,11 @@ current_timestamp(),
   
   async read(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    await this.method.errors.user_profile.read(data);
+    await this.method.errors.job_profile.read(data);
     const query = `
 select
 ${this._columns}
-from user_profile
+from job_profile
 where url_title = ?;
 `;
     const params = [data.url_title];
@@ -76,7 +76,7 @@ where url_title = ?;
   
 async update(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    await this.method.errors.user_profile.update(data);
+    await this.method.errors.job_profile.update(data);
 
     const short_title = data.title
       .split(" ")
@@ -86,7 +86,7 @@ async update(data) {
     const url_title = `${this.method.urlify(short_title)}-${this.method.shortid.generate()}`;
 
     const query = `
-update user_profile
+update job_profile
 updated_at = current_timestamp(),
 url_title = ?,
 first_name = ?,
@@ -110,7 +110,7 @@ where owner_id = uuid_to_bin(?) and _id = uuid_to_bin(?);
 
   async search(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    await this.method.errors.user_profile.search(data);
+    await this.method.errors.job_profile.search(data);
     
     var where = "";
     data.search_query.map((d, i) => {
@@ -122,11 +122,22 @@ where owner_id = uuid_to_bin(?) and _id = uuid_to_bin(?);
     const query = `
 select
 ${this._columns}
-from user_profile
+from job_profile
 ${where}
 order by created_at desc limit ${index * offset}, ${offset};
 `;
     const params = [];
+    return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
+  }
+  
+  async remove(data) {
+    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
+    await this.method.errors.job_profile.remove(data);
+
+    const query = `
+delete from job_profile where owner_id = uuid_to_bin(?) and _id = uuid_to_bin(?);
+`;
+    const params = [data.owner_id, data._id];
     return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
   }
 
