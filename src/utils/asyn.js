@@ -4,7 +4,6 @@ const api = require("./api");
 module.exports.route = function(mw) {
   return function(req, res, next) {
     mw(req, res, next).catch(e => {
-      console.log(e);
       res.status(500);
       res.json(
         api.error({
