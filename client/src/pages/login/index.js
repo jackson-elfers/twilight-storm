@@ -26,7 +26,7 @@ function Main(props) {
       <h1>Login</h1>
       <hr />
       <form id="formOne" onSubmit={login}>
-        <input type="text" name="username" placeholder="username" />
+        <input type="text" name="username" placeholder="email" />
         <input type="password" name="password" placeholder="password" />
         <input type="submit" value="login" />
       </form>

@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const api = require("./api");
 const check = require("check-types");
 
 function generate(data) {
@@ -28,6 +27,10 @@ function decode(data) {
   });
 }
 
+module.exports.generate = generate;
+
+module.exports.decode = decode;
+
 // verify/decode token/payload
 module.exports.verify = async function(data) {
   check.assert(check.string(data), "expected string as first argument");
@@ -38,16 +41,4 @@ module.exports.verify = async function(data) {
 module.exports.sign = async function(data) {
   check.assert(check.object(data), "expected object as first argument");
   return await generate(data);
-};
-
-// authorization middleware
-module.exports.secured = async function(req, res, next) {
-  try {
-    check.assert(req.cookies.hasOwnProperty("Authorization"), "'Authorization' key missing from cookies");
-    req.user = await decode(req.cookies.Authorization);
-    next();
-  } catch (e) {
-    res.status(401);
-    res.json(api.error({ status: 401, detail: "This route is protected." }));
-  }
 };
