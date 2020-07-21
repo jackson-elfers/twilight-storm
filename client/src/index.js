@@ -13,7 +13,7 @@ import {
   Login,
   Logout,
   Register,
-  UpdateUsername,
+  UpdateEmail,
   UpdatePassword,
   Unregister,
   NotFound
@@ -36,7 +36,7 @@ const routing = (
             <Route exact path={routes.Login} component={Login} />
             <Route exact path={routes.Logout} component={Logout} />
             <Route exact path={routes.Register} component={Register} />
-            <Route exact path={routes.UpdateUsername} component={UpdateUsername} />
+            <Route exact path={routes.UpdateEmail} component={UpdateEmail} />
             <Route exact path={routes.UpdatePassword} component={UpdatePassword} />
             <Route exact path={routes.Unregister} component={Unregister} />
             <Route component={NotFound} />

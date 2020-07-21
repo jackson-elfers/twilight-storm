@@ -7,8 +7,8 @@ module.exports = class {
 
   async _validEmail(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    if (!this.method.emailValidator.validate(data.username)) {
-      throw new Error("Username must be a valid email address.");
+    if (!this.method.emailValidator.validate(data.email)) {
+      throw new Error("email must be a valid email address.");
     }
   }
 
@@ -16,23 +16,23 @@ module.exports = class {
 
   async login(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { username: "string", password: "string" };
+    const template = { email: "string", password: "string" };
     this.method.utils.checktypes({ template: template, params: data });
   }
 
   async register(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { username: "string", password: "string" };
+    const template = { email: "string", password: "string" };
     this.method.utils.checktypes({ template: template, params: data });
 
-    const username = this.method.config.settings.user.username;
+    const email = this.method.config.settings.user.email;
     const password = this.method.config.settings.user.password;
     await this._validEmail(data);
-    if (data.username.length < username.min) {
-      throw new Error(`Username must be greater than ${username.min} characters.`);
+    if (data.email.length < email.min) {
+      throw new Error(`email must be greater than ${email.min} characters.`);
     }
-    if (data.username.length > username.max) {
-      throw new Error(`Username must be less than ${username.max} characters.`);
+    if (data.email.length > email.max) {
+      throw new Error(`email must be less than ${email.max} characters.`);
     }
     if (data.password.length < password.min) {
       throw new Error(`Password must be greater than ${password.min} characters.`);
@@ -48,24 +48,24 @@ module.exports = class {
     this.method.utils.checktypes({ template: template, params: data });
   }
 
-  async usernameExists(data) {
+  async emailExists(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { username: "string" };
+    const template = { email: "string" };
     this.method.utils.checktypes({ template: template, params: data });
   }
 
-  async updateUsername(data) {
+  async updateEmail(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { _id: "string", username: "string" };
+    const template = { _id: "string", email: "string" };
     this.method.utils.checktypes({ template: template, params: data });
 
-    const username = this.method.config.settings.user.username;
+    const email = this.method.config.settings.user.email;
     await this._validEmail(data);
-    if (data.username.length < username.min) {
-      throw new Error(`Username must be greater than ${username.min} characters.`);
+    if (data.email.length < email.min) {
+      throw new Error(`email must be greater than ${email.min} characters.`);
     }
-    if (data.username.length > username.max) {
-      throw new Error(`Username must be less than ${username.max} characters.`);
+    if (data.email.length > email.max) {
+      throw new Error(`email must be less than ${email.max} characters.`);
     }
   }
 

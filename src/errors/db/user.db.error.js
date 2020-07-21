@@ -5,9 +5,9 @@ module.exports = class {
 
   // helpers
 
-  async readSingleUsername(data) {
+  async readSingleEmail(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { username: "string" };
+    const template = { email: "string" };
     this.method.utils.checktypes({ template: template, params: data });
   }
 
@@ -15,13 +15,13 @@ module.exports = class {
 
   async login(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { username: "string", password: "string" };
+    const template = { email: "string", password: "string" };
     this.method.utils.checktypes({ template: template, params: data });
   }
 
   async register(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { username: "string", password: "string" };
+    const template = { email: "string", password: "string" };
     this.method.utils.checktypes({ template: template, params: data });
   }
 
@@ -31,15 +31,15 @@ module.exports = class {
     this.method.utils.checktypes({ template: template, params: data });
   }
 
-  async usernameExists(data) {
+  async emailExists(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { username: "string" };
+    const template = { email: "string" };
     this.method.utils.checktypes({ template: template, params: data });
   }
 
-  async updateUsername(data) {
+  async updateEmail(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { _id: "string", username: "string" };
+    const template = { _id: "string", email: "string" };
     this.method.utils.checktypes({ template: template, params: data });
   }
 

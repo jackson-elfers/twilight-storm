@@ -10,14 +10,14 @@ _id binary(16) not null,
 created_at datetime not null,
 updated_at datetime not null,
 login_at datetime not null,
-username varchar(255) not null unique,
+email varchar(255) not null unique,
 password varchar(255) not null,
 primary key (_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 `;
     await this.method.utils.db.query(query);
   }
-  
+
   async ticket() {
     const query = `
 create table if not exists ticket(
@@ -35,7 +35,7 @@ on delete cascade
 `;
     await this.method.utils.db.query(query);
   }
-  
+
   async user_profile() {
     const query = `
 create table if not exists user_profile(
@@ -63,8 +63,8 @@ on delete cascade
 `;
     await this.method.utils.db.query(query);
   }
-  
-   async job_profile() {
+
+  async job_profile() {
     const query = `
 create table if not exists job_profile(
 _id binary(16) not null,
@@ -91,7 +91,7 @@ on delete cascade
 `;
     await this.method.utils.db.query(query);
   }
-  
+
   async file() {
     const query = `
 create table if not exists file(
@@ -108,6 +108,4 @@ primary key (_id)
 `;
     await this.method.utils.db.query(query);
   }
-  
 };
-

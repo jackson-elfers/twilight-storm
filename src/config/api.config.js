@@ -3,10 +3,10 @@ module.exports = {
     login: "/api/user/login",
     logout: "/api/user/logout",
     readSingleId: "/api/user/read/id",
-    usernameExists: "/api/user/exists/username",
+    emailExists: "/api/user/exists/email",
     info: "/api/user/info",
     register: "/api/user/register",
-    updateUsername: "/api/user/update/username",
+    updateEmail: "/api/user/update/email",
     updatePassword: "/api/user/update/password",
     unregister: "/api/user/unregister"
   }

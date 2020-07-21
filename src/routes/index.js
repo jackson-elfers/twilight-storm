@@ -10,14 +10,14 @@ module.exports = function(app) {
   app.post(config.api.user.login, utils.asyn.route(user.login));
   app.get(config.api.user.logout, user.logout);
   app.get(`${config.api.user.readSingleId}/:_id`, user.readSingleId);
-  app.get(`${config.api.user.usernameExists}/:username`, user.usernameExists);
+  app.get(`${config.api.user.emailExists}/:email`, user.emailExists);
   app.get(config.api.user.info, utils.asyn.route(mw.jwt.secured), utils.asyn.route(user.info));
   app.post(
     config.api.user.register,
     utils.asyn.route(mw.recaptcha.verify.bind(mw.recaptcha)),
     utils.asyn.route(user.register)
   );
-  app.put(config.api.user.updateUsername, utils.asyn.route(mw.jwt.secured), utils.asyn.route(user.updateUsername));
+  app.put(config.api.user.updateEmail, utils.asyn.route(mw.jwt.secured), utils.asyn.route(user.updateEmail));
   app.put(config.api.user.updatePassword, utils.asyn.route(mw.jwt.secured), utils.asyn.route(user.updatePassword));
   app.delete(config.api.user.unregister, utils.asyn.route(mw.jwt.secured), utils.asyn.route(user.unregister));
 

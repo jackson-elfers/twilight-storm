@@ -7,9 +7,9 @@ function Main(props) {
   function menu() {
     return [
       [
-        "Update Username",
+        "Update Email",
         () => {
-          props.history.push(routes.UpdateUsername);
+          props.history.push(routes.UpdateEmail);
         }
       ],
       [

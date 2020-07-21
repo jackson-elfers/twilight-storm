@@ -141,6 +141,7 @@ where owner_id = uuid_to_bin(?) and role = ?;
 delete from ticket where owner_id = uuid_to_bin(?) and role = ?;
 
 ```
+
 ### user_profile
 
 ```
@@ -399,8 +400,8 @@ search: GET /api/job/search/:index/:offset/:search_query
 (file)
 
 uploadResume: POST /api/file/upload/resume (secured)
-read: GET /api/file/read/:storage_name
 readByParentId: GET /api/file/read/parent_id/:parent_id
+readByStorageName: GET /api/file/read/:storage_name
 remove: DELETE /api/file/delete (secured)
 
 (internal services)

@@ -5,7 +5,7 @@ module.exports = {
   Login: "/account/login",
   Logout: "/account/logout",
   Register: "/account/register",
-  UpdateUsername: "/account/update/username",
+  UpdateEmail: "/account/update/email",
   UpdatePassword: "/account/update/password",
   Unregister: "/account/unregister"
 };

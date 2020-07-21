@@ -13,7 +13,6 @@ role
   }
 
   async create(data) {
-    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
     await this.method.errors.ticket.create(data);
     const query = `
 insert into ticket
@@ -32,7 +31,6 @@ current_timestamp(),
   }
 
   async read(data) {
-    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
     await this.method.errors.ticket.read(data);
     const query = `
 select
@@ -43,9 +41,8 @@ where owner_id = uuid_to_bin(?) and role = ?;
     const params = [data.owner_id, data.role];
     return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
   }
-  
-async remove(data) {
-    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
+
+  async remove(data) {
     await this.method.errors.ticket.remove(data);
     const query = `
 delete from ticket where owner_id = uuid_to_bin(?) and role = ?;
@@ -53,5 +50,4 @@ delete from ticket where owner_id = uuid_to_bin(?) and role = ?;
     const params = [data.owner_id, data.role];
     return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
   }
- 
 };

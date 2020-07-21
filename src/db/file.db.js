@@ -14,7 +14,6 @@ storage_name
   }
 
   async create(data) {
-    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
     await this.method.errors.file.create(data);
     const query = `
 insert into file
@@ -33,11 +32,13 @@ current_timestamp(),
     const content_type = this.method.mime.lookup(data.file_name);
     const storage_name = `${_id}.${this.method.mime.extension(content_type)}`;
     const params = [_id, data.parent_id, data.owner_id, content_type, data.file_name, storage_name];
-    return await this.method.utils.db.query(this.method.sqlstring.format(query, params), { storage_name: storage_name, content_type: content_type });
+    return await this.method.utils.db.query(this.method.sqlstring.format(query, params), {
+      storage_name: storage_name,
+      content_type: content_type
+    });
   }
 
   async readByParentId(data) {
-    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
     await this.method.errors.file.readByParentId(data);
     const query = `
 select
@@ -48,9 +49,8 @@ where parent_id = uuid_to_bin(?);
     const params = [data.parent_id];
     return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
   }
-  
+
   async readByOwnerId(data) {
-    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
     await this.method.errors.file.readByOwnerId(data);
     const query = `
 select
@@ -63,7 +63,6 @@ where owner_id = uuid_to_bin(?);
   }
 
   async remove(data) {
-    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
     await this.method.errors.file.remove(data);
     const query = `
 delete from file where owner_id = uuid_to_bin(?) and storage_name = ?;

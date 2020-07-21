@@ -13,17 +13,16 @@ function Main(props) {
     e.preventDefault();
     const form = document.getElementById("formOne");
     const data = {
-      username: form.username.value,
+      email: form.email.value,
       password: form.password.value,
       recaptcha_token: recaptcha
     };
     try {
       await errors.user.register(data);
       if (
-        (await axios.get(`${process.env.REACT_APP_API}${api.user.usernameExists}/${data.username}`)).data.data
-          .length !== 0
+        (await axios.get(`${process.env.REACT_APP_API}${api.user.emailExists}/${data.email}`)).data.data.length !== 0
       ) {
-        throw new Error(`${data.username} already exists as a username.`);
+        throw new Error(`${data.email} already exists as an email.`);
       }
       check.assert(data.password === form.confirm.value, "Please make sure passwords match.");
       check.assert(recaptcha !== null, "Please check, 'I am not a robot'.");
@@ -66,7 +65,7 @@ function Main(props) {
       <h1>Register</h1>
       <hr />
       <form id="formOne" onSubmit={register}>
-        <input type="text" name="username" placeholder="email" />
+        <input type="text" name="email" placeholder="email" />
         <input type="password" name="password" placeholder="password" />
         <input type="password" name="confirm" placeholder="password confirm" />
         <input type="submit" value="register" />

@@ -10,7 +10,7 @@ export { default as Logout } from "./logout";
 
 export { default as Register } from "./register";
 
-export { default as UpdateUsername } from "./update-username";
+export { default as UpdateEmail } from "./update-email";
 
 export { default as UpdatePassword } from "./update-password";
 

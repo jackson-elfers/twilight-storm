@@ -8,7 +8,7 @@ function Main(props) {
   async function login(e) {
     e.preventDefault();
     const form = document.getElementById("formOne");
-    const data = { username: form.username.value, password: form.password.value };
+    const data = { email: form.email.value, password: form.password.value };
     try {
       const response = await axios.post(`${process.env.REACT_APP_API}${api.user.login}`, data);
       if (response.data.error) {
@@ -26,7 +26,7 @@ function Main(props) {
       <h1>Login</h1>
       <hr />
       <form id="formOne" onSubmit={login}>
-        <input type="text" name="username" placeholder="email" />
+        <input type="text" name="email" placeholder="email" />
         <input type="password" name="password" placeholder="password" />
         <input type="submit" value="login" />
       </form>

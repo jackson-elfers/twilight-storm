@@ -45,9 +45,9 @@ module.exports.readSingleId = async function(req, res) {
   }
 };
 
-module.exports.usernameExists = async function(req, res) {
+module.exports.emailExists = async function(req, res) {
   try {
-    res.json(utils.api.send((await actions.user.usernameExists(req.params)).results));
+    res.json(utils.api.send((await actions.user.emailExists(req.params)).results));
   } catch (e) {
     console.log(e);
     res.json(
@@ -84,11 +84,11 @@ module.exports.register = async function(req, res) {
   }
 };
 
-module.exports.updateUsername = async function(req, res) {
+module.exports.updateEmail = async function(req, res) {
   try {
     check.assert(check.object(req.body), "expected object attached to req.body");
     req.body._id = req.user._id;
-    await actions.user.updateUsername(req.body);
+    await actions.user.updateEmail(req.body);
     res.json(utils.api.send(null));
   } catch (e) {
     console.log(e);
