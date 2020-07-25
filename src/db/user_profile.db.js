@@ -137,11 +137,11 @@ where owner_id = uuid_to_bin(?) and _id = uuid_to_bin(?);
     await this.method.errors.user_profile.search(data);
 
     var where = "";
-    data.search_query.map((d, i) => {
+    data.search_query.split.map((d, i) => {
       where += ` ${this.method.sqlstring.escape(
-        `first_name like %${d.first_name}% or last_name like %${d.last_name}% or city like %${d.city}% or state like %${
+        `first_name like %${d}% or last_name like %${d}% or city like %${d}% or state like %${
           d.state
-        }% or street like %${d.street}% or zip like %${d.zip}% or title like %${d.title}% or ${d.keywords
+        }% or street like %${d}% or zip like %${d}% or title like %${d}% or ${d
           .split(" ")
           .map((d, i) => {
             return ` or like %${d}% `;
