@@ -354,16 +354,26 @@ delete from file where owner_id = uuid_to_bin(?) and storage_name = ?;
 ```
 (client)
 
-home: /
-profile: /profile/:url_title
-update profile: /profile/edit/:url_title
-upload resume: /upload/resume/:url_title
-job create: /job/create
-job update: /job/update/:url_title
-job delete: /job/delete/:url_title
-search profile: /search/profile/:index/:search_query
-search job: /search/job/:index/:search_query
-admin: /admin/login
+module.exports = {
+  Home: "/",
+  Menu: "/menu",
+  Account: "/account",
+  Login: "/account/login",
+  Logout: "/account/logout",
+  Register: "/account/register",
+  UpdateEmail: "/account/update/email",
+  UpdatePassword: "/account/update/password",
+  Unregister: "/account/unregister",
+  UserProfile: "/profile",
+  UserProfileUpdate: "/profile/update",
+  UserProfileSearch: "/profile/search",
+  UploadResume: "/upload/resume",
+  JobProfile: "/job/:url_title",
+  JobProfileCreate: "/job/create",
+  JobProfileUpdate: "/job/update",
+  JobProfileDelete: "/job/delete",
+  JobProfileSearch: "/job/search"
+};
 
 (user)
 

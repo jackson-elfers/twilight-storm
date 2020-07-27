@@ -7,5 +7,14 @@ module.exports = {
   Register: "/account/register",
   UpdateEmail: "/account/update/email",
   UpdatePassword: "/account/update/password",
-  Unregister: "/account/unregister"
+  Unregister: "/account/unregister",
+  UserProfile: "/profile",
+  UserProfileUpdate: "/profile/update",
+  UserProfileSearch: "/profile/search",
+  UploadResume: "/upload/resume",
+  JobProfile: "/job/:url_title",
+  JobProfileCreate: "/job/create",
+  JobProfileUpdate: "/job/update",
+  JobProfileDelete: "/job/delete",
+  JobProfileSearch: "/job/search"
 };

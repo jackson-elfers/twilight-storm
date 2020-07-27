@@ -16,7 +16,15 @@ import {
   UpdateEmail,
   UpdatePassword,
   Unregister,
-  NotFound
+  NotFound,
+  Profile,
+  UpdateProfile,
+  UploadResume,
+  JobCreate,
+  JobUpdate,
+  JobDelete,
+  SearchProfile,
+  SearchJob
 } from "./pages";
 import { Status, Scroll, SetUser, Notice } from "./components";
 import { routes } from "./config";
@@ -39,6 +47,15 @@ const routing = (
             <Route exact path={routes.UpdateEmail} component={UpdateEmail} />
             <Route exact path={routes.UpdatePassword} component={UpdatePassword} />
             <Route exact path={routes.Unregister} component={Unregister} />
+            <Route exact path={`${routes.UserProfile}/:url_title`} component={UserProfile} />
+            <Route exact path={`${routes.UserProfileUpdate}/:url_title`} component={UserProfileUpdate} />
+            <Route exact path={`${routes.UserProfileSearch}/:index/:search_query`} component={UserProfileSearch} />
+            <Route exact path={`${routes.UploadResume}/:url_title`} component={UploadResume} />
+            <Route exact path={`${routes.JobProfile}/:url_title`} component={JobProfile} />
+            <Route exact path={`${routes.JobProfileCreate}`} component={JobProfileCreate} />
+            <Route exact path={`${routes.JobProfileUpdate}/:url_title`} component={JobProfileUpdate} />
+            <Route exact path={`${routes.JobProfileDelete}/:url_title`} component={JobProfileDelete} />
+            <Route exact path={`${routes.JobProfileSearch}/:index/:search_query`} component={JobProfileSearch} />
             <Route component={NotFound} />
           </Switch>
         </Notice>
