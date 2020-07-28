@@ -14,16 +14,10 @@ module.exports = class {
 
   // errors
 
-  async login(data) {
-    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { email: "string", password: "string" };
-    this.method.utils.checktypes({ template: template, params: data });
-  }
+  async login(data) {}
 
   async register(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { email: "string", password: "string" };
-    this.method.utils.checktypes({ template: template, params: data });
 
     const email = this.method.config.settings.user.email;
     const password = this.method.config.settings.user.password;
@@ -42,22 +36,12 @@ module.exports = class {
     }
   }
 
-  async readSingleId(data) {
-    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { _id: "string" };
-    this.method.utils.checktypes({ template: template, params: data });
-  }
+  async readSingleId(data) {}
 
-  async emailExists(data) {
-    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { email: "string" };
-    this.method.utils.checktypes({ template: template, params: data });
-  }
+  async emailExists(data) {}
 
   async updateEmail(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { _id: "string", email: "string" };
-    this.method.utils.checktypes({ template: template, params: data });
 
     const email = this.method.config.settings.user.email;
     await this._validEmail(data);
@@ -71,8 +55,6 @@ module.exports = class {
 
   async updatePassword(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { _id: "string", password: "string" };
-    this.method.utils.checktypes({ template: template, params: data });
 
     const password = this.method.config.settings.user.password;
     if (data.password.length < password.min) {
@@ -83,9 +65,5 @@ module.exports = class {
     }
   }
 
-  async unregister(data) {
-    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
-    const template = { _id: "string" };
-    this.method.utils.checktypes({ template: template, params: data });
-  }
+  async unregister(data) {}
 };

@@ -8,13 +8,11 @@ const Admin = require("./admin.controller.error");
 const utils = require("../../utils");
 const config = require("../../config");
 const check = require("check-types");
-const emailValidator = require("email-validator");
 
 const method = {
   check: check,
   utils: utils,
-  config: config,
-  emailValidator: emailValidator
+  config: config
 };
 
 module.exports.user = new User({ method: method });
