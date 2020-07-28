@@ -3,12 +3,6 @@ module.exports = class {
     this.method = props.method;
   }
 
-  // helpers
-
-  async _validEmail(data) {}
-
-  // errors
-
   async login(data) {}
 
   async register(data) {}
