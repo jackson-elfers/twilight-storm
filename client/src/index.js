@@ -17,14 +17,15 @@ import {
   UpdatePassword,
   Unregister,
   NotFound,
-  Profile,
-  UpdateProfile,
+  UserProfile,
+  UserProfileUpdate,
+  UserProfileSearch,
   UploadResume,
-  JobCreate,
-  JobUpdate,
-  JobDelete,
-  SearchProfile,
-  SearchJob
+  JobProfile,
+  JobProfileCreate,
+  JobProfileUpdate,
+  JobProfileDelete,
+  JobProfileSearch
 } from "./pages";
 import { Status, Scroll, SetUser, Notice } from "./components";
 import { routes } from "./config";

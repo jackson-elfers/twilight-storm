@@ -1,8 +1,8 @@
 const user = require("./user");
-const ticket = require("./ticket");
 const user_profile = require("./user_profile");
 const job_profile = require("./job_profile");
 const file = require("./file");
+const admin = require("./admin");
 const client = require("./client");
 
 const utils = require("../utils");

@@ -108,7 +108,7 @@ zip = ?,
 work_phone = ?,
 work_email = ?,
 title = ?,
-summary = ?
+summary = ?,
 keywords = ?
 where owner_id = uuid_to_bin(?) and _id = uuid_to_bin(?);
 `;

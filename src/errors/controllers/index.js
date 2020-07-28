@@ -3,7 +3,7 @@ const UserProfile = require("./user_profile.controller.error");
 const JobProfile = require("./job_profile.controller.error");
 const Ticket = require("./ticket.controller.error");
 const File = require("./file.controller.error");
-const Admin = require("./admin.service.error");
+const Admin = require("./admin.controller.error");
 
 const utils = require("../../utils");
 const config = require("../../config");
