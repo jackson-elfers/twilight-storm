@@ -10,7 +10,23 @@ module.exports = class {
 
   async register(data) {
     await this.method.errors.user.register(data);
-    return await this.method.services.user.register(data);
+    const responseOne = await this.method.services.user.register(data);
+    const responseTwo = await this.method.services.user_profile.create({
+      owner_id: responseOne.info._id,
+      first_name: "",
+      last_name: "",
+      city: "",
+      state: "",
+      street: "",
+      zip: "",
+      work_phone: "",
+      work_email: "",
+      title: "",
+      summary: "",
+      keywords: ""
+    });
+    responseOne.info.url_title = responseTwo.info.url_title;
+    return responseOne;
   }
 
   async readSingleId(data) {

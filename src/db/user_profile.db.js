@@ -47,6 +47,8 @@ current_timestamp(),
 ?,
 ?,
 ?,
+?,
+?,
 ?
 );
 `;

@@ -1,5 +1,9 @@
 const Models = require("./models.db");
 const User = require("./user.db");
+const UserProfile = require("./user_profile.db");
+const JobProfile = require("./job_profile.db");
+const Ticket = require("./ticket.db");
+const File = require("./file.db");
 
 const errors = require("../errors/db");
 const utils = require("../utils");
@@ -30,3 +34,11 @@ const method = {
 module.exports.models = new Models({ method: method });
 
 module.exports.user = new User({ method: method });
+
+module.exports.user_profile = new UserProfile({ method: method });
+
+module.exports.job_profile = new JobProfile({ method: method });
+
+module.exports.ticket = new Ticket({ method: method });
+
+module.exports.file = new File({ method: method });

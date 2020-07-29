@@ -26,14 +26,10 @@ module.exports = class {
     data.email = data.email.toLowerCase();
     const user = await this.method.db.user.readSingleEmail(data);
     this.method.check.assert(user.results.length === 0, "email must be unique");
-    return {
-      _id: (
-        await this.method.db.user.register({
-          email: data.email,
-          password: await this.method.utils.bcrypt.hash(data.password)
-        })
-      ).info._id
-    };
+    return await this.method.db.user.register({
+      email: data.email,
+      password: await this.method.utils.bcrypt.hash(data.password)
+    });
   }
 
   async readSingleId(data) {

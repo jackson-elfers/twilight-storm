@@ -71,8 +71,8 @@ module.exports.info = async function(req, res) {
 module.exports.register = async function(req, res) {
   try {
     check.assert(check.object(req.body), "expected object attached to req.body");
-    await actions.user.register(req.body);
-    res.json(utils.api.send(null));
+    const response = await actions.user.register(req.body);
+    res.json(utils.api.send({ _id: response.info._id, url_title: response.info.url_title }));
   } catch (e) {
     console.log(e);
     res.json(

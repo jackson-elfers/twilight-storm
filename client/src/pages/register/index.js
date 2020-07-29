@@ -37,7 +37,8 @@ function Main(props) {
         throw new Error(responseTwo.data.error.detail);
       }
       await props.actions.user.set();
-      props.history.push(routes.Account);
+      console.log(responseOne);
+      //props.history.push(routes.Account);
     } catch (e) {
       props.actions.notice.message(e.message);
     }

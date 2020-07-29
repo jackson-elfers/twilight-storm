@@ -6,8 +6,8 @@ const config = require("../config");
 module.exports.create = async function(req, res) {
   try {
     check.assert(check.object(req.body), "expected object attached to req.body");
-    await actions.job_profile.create(req.body);
-    res.json(utils.api.send(null));
+    const response = await actions.job_profile.create(req.body);
+    res.json(utils.api.send({ _id: response.info._id, url_title: response.info.url_title }));
   } catch (e) {
     console.log(e);
     res.json(
