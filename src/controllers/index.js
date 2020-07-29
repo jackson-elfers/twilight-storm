@@ -1,4 +1,8 @@
 const User = require("./user.controller");
+const UserProfile = require("./user_profile.controller");
+const JobProfile = require("./job_profile.controller");
+const File = require("./file.controller");
+const Admin = require("./admin.controller");
 
 const errors = require("../errors/controllers");
 const services = require("../services");
@@ -17,3 +21,11 @@ const method = {
 };
 
 module.exports.user = new User({ method: method });
+
+module.exports.user_profile = new UserProfile({ method: method });
+
+module.exports.job_profile = new JobProfile({ method: method });
+
+module.exports.file = new File({ method: method });
+
+module.exports.admin = new Admin({ method: method });

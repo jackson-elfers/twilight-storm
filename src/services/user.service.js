@@ -28,7 +28,7 @@ module.exports = class {
     this.method.check.assert(user.results.length === 0, "email must be unique");
     return {
       _id: (
-        await this.method.db.user.create({
+        await this.method.db.user.register({
           email: data.email,
           password: await this.method.utils.bcrypt.hash(data.password)
         })

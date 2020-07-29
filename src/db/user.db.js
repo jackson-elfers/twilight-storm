@@ -3,8 +3,8 @@ module.exports = class {
     this.method = props.method;
   }
 
-  async create(data) {
-    await this.method.errors.user.create(data);
+  async register(data) {
+    await this.method.errors.user.register(data);
     const query = `
 insert into user
 values(
