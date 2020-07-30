@@ -394,7 +394,8 @@ validate: GET /api/admin/validate
 
 (user_profile)
 
-read: GET /api/job/read/:url_title
+read: GET /api/profile/read/:url_title
+resolve: GET /api/profile/resolve/:owner_id
 update: PUT /api/profile/update (secured)
 search: GET /api/profile/search/:index/:offset/:search_query
 

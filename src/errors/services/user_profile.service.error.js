@@ -5,9 +5,11 @@ module.exports = class {
 
   async create(data) {}
 
-  async update(data) {}
+  async resolve(data) {}
 
   async read(data) {}
+
+  async update(data) {}
 
   async search(data) {}
 };

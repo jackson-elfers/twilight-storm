@@ -16,6 +16,7 @@ module.exports = {
   },
   user_profile: {
     read: "/api/user_profile/read",
+    resolve: "/api/profile/resolve",
     update: "/api/user_profile/update",
     search: "/api/user_profile/search"
   },

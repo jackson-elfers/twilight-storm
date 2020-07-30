@@ -37,6 +37,7 @@ module.exports = function(app) {
 
   // user_profile
   app.get(`${config.api.user_profile.read}/:url_title`, utils.asyn.route(user_profile.read));
+  app.get(`${config.api.user_profile.resolve}/:owner_id`, utils.asyn.route(user_profile.resolve));
   app.put(config.api.user_profile.update, utils.asyn.route(mw.jwt.secured), utils.asyn.route(user_profile.update));
   app.get(`${config.api.user_profile.search}/:index/:offset/:search_query`, utils.asyn.route(user_profile.search));
 

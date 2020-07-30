@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import check from "check-types";
 import { routes, api } from "../../config";
@@ -33,6 +33,39 @@ function Main(props) {
     }
   }
 
+  async function loadUserProfile() {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}${api.user_profile.read}/${props.match.params.url_title}`
+    );
+    if (response.data.error) {
+      throw new Error(response.data.error.detail);
+    }
+    const form = document.getElementById("formOne");
+    form.first_name.value = response.data.data[0].first_name;
+    form.last_name.value = response.data.data[0].last_name;
+    form.city.value = response.data.data[0].city;
+    form.state.value = response.data.data[0].state;
+    form.street.value = response.data.data[0].street;
+    form.zip.value = response.data.data[0].zip;
+    form.work_phone.value = response.data.data[0].work_phone;
+    form.work_email.value = response.data.data[0].work_email;
+    form.title.value = response.data.data[0].title;
+    form.summary.value = response.data.data[0].summary;
+    form.keywords.value = response.data.data[0].keywords;
+  }
+
+  async function load() {
+    await loadUserProfile();
+  }
+
+  useEffect(() => {
+    try {
+      load();
+    } catch (e) {
+      props.actions.notice.message(e.message);
+    }
+  }, []);
+
   return (
     <div>
       <h1>User Profile</h1>
@@ -48,6 +81,7 @@ function Main(props) {
         <input type="text" name="work_email" placeholder="Work Email" />
         <input type="text" name="title" placeholder="Title" />
         <textarea name="summary" placeholder="Summary" />
+        <input type="text" name="keywords" placeholder="Keywords" />
         <input type="submit" value="update" />
       </form>
     </div>

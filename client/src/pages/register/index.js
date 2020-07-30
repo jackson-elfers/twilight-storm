@@ -37,8 +37,7 @@ function Main(props) {
         throw new Error(responseTwo.data.error.detail);
       }
       await props.actions.user.set();
-      console.log(responseOne);
-      //props.history.push(routes.Account);
+      props.history.push(`${routes.UserProfileUpdate}/${responseOne.data.data.url_title}`);
     } catch (e) {
       props.actions.notice.message(e.message);
     }

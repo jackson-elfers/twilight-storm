@@ -22,6 +22,12 @@ module.exports = class {
     this.method.utils.checktypes({ template: template, params: data });
   }
 
+  async resolve(data) {
+    this.method.check.assert(this.method.check.object(data), "expected object as first argument");
+    const template = { owner_id: "string" };
+    this.method.utils.checktypes({ template: template, params: data });
+  }
+
   async read(data) {
     this.method.check.assert(this.method.check.object(data), "expected object as first argument");
     const template = { url_title: "string" };

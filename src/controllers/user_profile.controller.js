@@ -8,14 +8,19 @@ module.exports = class {
     return await this.method.services.user_profile.create(data);
   }
 
-  async update(data) {
-    await this.method.errors.user_profile.update(data);
-    return await this.method.services.user_profile.update(data);
+  async resolve(data) {
+    await this.method.errors.user_profile.resolve(data);
+    return await this.method.services.user_profile.resolve(data);
   }
 
   async read(data) {
     await this.method.errors.user_profile.read(data);
     return await this.method.services.user_profile.read(data);
+  }
+
+  async update(data) {
+    await this.method.errors.user_profile.update(data);
+    return await this.method.services.user_profile.update(data);
   }
 
   async search(data) {

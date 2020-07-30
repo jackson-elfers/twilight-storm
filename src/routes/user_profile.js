@@ -3,6 +3,21 @@ const utils = require("../utils");
 const check = require("check-types");
 const config = require("../config");
 
+module.exports.resolve = async function(req, res) {
+  try {
+    check.assert(check.object(req.params), "expected object attached to req.params");
+    res.json(utils.api.send((await actions.user_profile.resolve(req.params)).results));
+  } catch (e) {
+    console.log(e);
+    res.json(
+      utils.api.error({
+        status: 400,
+        detail: config.messages.serverError
+      })
+    );
+  }
+};
+
 module.exports.read = async function(req, res) {
   try {
     check.assert(check.object(req.params), "expected object attached to req.params");

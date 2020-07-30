@@ -75,6 +75,18 @@ current_timestamp(),
     });
   }
 
+  async resolve(data) {
+    await this.method.errors.user_profile.resolve(data);
+    const query = `
+select
+url_title
+from user_profile
+where owner_id = uuid_to_bin(?);
+`;
+    const params = [data.url_title];
+    return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
+  }
+
   async read(data) {
     await this.method.errors.user_profile.read(data);
     const query = `
