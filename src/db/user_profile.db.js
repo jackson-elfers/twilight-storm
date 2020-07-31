@@ -110,7 +110,7 @@ where url_title = ?;
     const url_title = `${this.method.urlify(short_title)}-${this.method.shortid.generate()}`;
 
     const query = `
-update user_profile
+update user_profile set
 updated_at = current_timestamp(),
 url_title = ?,
 first_name = ?,

@@ -36,9 +36,9 @@ module.exports.read = async function(req, res) {
 module.exports.update = async function(req, res) {
   try {
     check.assert(check.object(req.body), "expected object attached to req.body");
-    req.body._id = req.user._id;
-    await actions.user_profile.update(req.body);
-    res.json(utils.api.send(null));
+    req.body.owner_id = req.user._id;
+    const response = await actions.user_profile.update(req.body);
+    res.json(utils.api.send({ url_title: response.info.url_title }));
   } catch (e) {
     console.log(e);
     res.json(utils.api.error({ status: 400, detail: config.messages.serverError }));

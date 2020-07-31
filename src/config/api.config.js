@@ -16,17 +16,17 @@ module.exports = {
   },
   user_profile: {
     read: "/api/user_profile/read",
-    resolve: "/api/profile/resolve",
+    resolve: "/api/user_profile/resolve",
     update: "/api/user_profile/update",
     search: "/api/user_profile/search"
   },
   job_profile: {
-    create: "/api/job/create",
-    read: "/api/job/read",
-    readByOwnerId: "/api/job/read/owner",
-    update: "/api/job/update",
-    remove: "/api/job/delete",
-    search: "/api/job/search"
+    create: "/api/job_profile/create",
+    read: "/api/job_profile/read",
+    readByOwnerId: "/api/job_profile/read/owner",
+    update: "/api/job_profile/update",
+    remove: "/api/job_profile/delete",
+    search: "/api/job_profile/search"
   },
   file: {
     uploadResume: "/api/file/upload/resume",

@@ -52,7 +52,7 @@ module.exports.readByOwnerId = async function(req, res) {
 module.exports.update = async function(req, res) {
   try {
     check.assert(check.object(req.body), "expected object attached to req.body");
-    req.body._id = req.user._id;
+    req.body.owner_id = req.user._id;
     await actions.job_profile.update(req.body);
     res.json(utils.api.send(null));
   } catch (e) {

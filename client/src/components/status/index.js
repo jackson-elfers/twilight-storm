@@ -42,7 +42,7 @@ class Main extends React.Component {
     return (
       <div>
         <Link to={routes.Home}>
-          <h1>Boilerplate</h1>
+          <h1>Twilight Storm</h1>
         </Link>
         <div style={{ height: "50px" }}>
           <Nav user={this.props.globals.user.info} />

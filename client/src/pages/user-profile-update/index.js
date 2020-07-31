@@ -5,11 +5,13 @@ import { routes, api } from "../../config";
 import { connect } from "../../redux";
 
 function Main(props) {
+  const [profile, setProfile] = useState({});
+
   async function update(e) {
     e.preventDefault();
     const form = document.getElementById("formOne");
     const data = {
-      _id: "",
+      _id: profile._id,
       first_name: form.first_name.value,
       last_name: form.last_name.value,
       city: form.city.value,
@@ -23,11 +25,11 @@ function Main(props) {
       keywords: form.keywords.value
     };
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API}${api.user_profile.update}`, data);
+      const response = await axios.put(`${process.env.REACT_APP_API}${api.user_profile.update}`, data);
       if (response.data.error) {
         throw new Error(response.data.error.detail);
       }
-      props.history.push(routes.UserProfile);
+      props.history.push(`${routes.UserProfile}/${response.data.data.url_title}`);
     } catch (e) {
       props.actions.notice.message(e.message);
     }
@@ -39,7 +41,10 @@ function Main(props) {
     );
     if (response.data.error) {
       throw new Error(response.data.error.detail);
+    } else if (response.data.data.length === 0) {
+      throw new Error("This profile doesn't exist...");
     }
+    setProfile(response.data.data[0]);
     const form = document.getElementById("formOne");
     form.first_name.value = response.data.data[0].first_name;
     form.last_name.value = response.data.data[0].last_name;
@@ -55,15 +60,15 @@ function Main(props) {
   }
 
   async function load() {
-    await loadUserProfile();
-  }
-
-  useEffect(() => {
     try {
-      load();
+      await loadUserProfile();
     } catch (e) {
       props.actions.notice.message(e.message);
     }
+  }
+
+  useEffect(() => {
+    load();
   }, []);
 
   return (
