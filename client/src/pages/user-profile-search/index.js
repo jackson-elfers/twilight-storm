@@ -68,7 +68,11 @@ function Main(props) {
                   <h3>{`${d.title}`}</h3>
                   <hr />
                   <h2>{`${d.first_name} ${d.last_name}`}</h2>
-                  <p>{`${d.summary}`}</p>
+                  <p>
+                    {d.summary.split("\n").map((summaryParagraph, i) => {
+                      return <p>{summaryParagraph}</p>;
+                    })}
+                  </p>
                 </div>
 
                 <div className="box">
