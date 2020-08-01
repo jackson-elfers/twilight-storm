@@ -137,28 +137,23 @@ where owner_id = uuid_to_bin(?) and _id = uuid_to_bin(?);
     await this.method.errors.user_profile.search(data);
 
     var where = "";
-    data.search_query.split.map((d, i) => {
-      where += ` ${this.method.sqlstring.escape(
-        `first_name like %${d}% or last_name like %${d}% or city like %${d}% or state like %${
-          d.state
-        }% or street like %${d}% or zip like %${d}% or title like %${d}% or ${d
-          .split(" ")
-          .map((d, i) => {
-            return ` or like %${d}% `;
-          })
-          .join("")} `
-      )} `;
+    data.search_query.split(" ").map((d, i) => {
+      const string = this.method.sqlstring.escape(`%${d}%`);
+      where += `first_name like ${string} or last_name like ${string} or city like ${string} or state like ${string} or street like ${string} or zip like ${string} or title like ${string} or keywords like ${string}${
+        i !== data.search_query.split(" ").length - 1 ? " or " : " "
+      }`;
     });
 
-    const index = this.method.sqlstring.escape(data.index);
-    const offset = this.method.sqlstring.escape(data.offset);
+    const index = this.method.sqlstring.escape(Number(data.index));
+    const offset = this.method.sqlstring.escape(Number(data.offset));
     const query = `
 select
 ${this._columns}
 from user_profile
-${where}
+where ${where}
 order by created_at desc limit ${index * offset}, ${offset};
 `;
+
     const params = [];
     return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
   }
