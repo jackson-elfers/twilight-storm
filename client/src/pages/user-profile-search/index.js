@@ -6,30 +6,34 @@ import { routes, api } from "../../config";
 import { connect } from "../../redux";
 
 function Main(props) {
-  const [search, setSearch] = useState({});
+  const [search, setSearch] = useState([]);
   const [loading, setLoading] = useState(true);
 
   async function getSearch(e) {
     e.preventDefault();
     const form = document.getElementById("formOne");
-    const data = { index: props.match.params.index, search_query: form.search_query.value };
+    const data = { search_query: form.search_query.value };
     try {
-      props.history.push(`${props.UserProfileSearch}/${data.index}/${32}/${data.search_query}`);
+      window.location.href = `${routes.UserProfileSearch}/0/${data.search_query}`;
     } catch (e) {
       props.actions.notice.message(e.message);
     }
   }
 
   async function loadSearch() {
+    const form = document.getElementById("formOne");
+    form.search_query.value = props.match.params.search_query;
     const response = await axios.get(
-      `${process.env.REACT_APP_API}${api.user_profile.search}/${props.match.params.index}/${props.match.params.search_query}`
+      `${process.env.REACT_APP_API}${api.user_profile.search}/${props.match.params.index}/32/${props.match.params.search_query}`
     );
     if (response.data.error) {
       throw new Error(response.data.error.detail);
-    } else if (response.data.data.length === 0) {
+    }
+    setSearch(response.data.data);
+
+    if (response.data.data.length === 0) {
       throw new Error("No profiles match that search...");
     }
-    setSearch(response.data.data[0]);
   }
 
   async function load() {
@@ -45,14 +49,21 @@ function Main(props) {
     load();
   }, []);
 
-  if (loading) {
-    return <div></div>;
-  }
-
   return (
     <div>
       <h1>Search Profiles</h1>
       <hr />
+      {Number(props.match.params.index) === 0 ? (
+        <div style={{ display: "none" }}></div>
+      ) : (
+        <a
+          href={`${routes.UserProfileSearch}/${Number(props.match.params.index) - 1}/${
+            props.match.params.search_query
+          }`}
+        >
+          <button>previous</button>
+        </a>
+      )}
       <form id="formOne" onSubmit={getSearch}>
         <input type="text" name="search_query" placeholder="search" />
         <input type="submit" value="search" />
@@ -60,31 +71,26 @@ function Main(props) {
       {loading ? (
         <div style={{ display: "none" }}></div>
       ) : (
-        search
-          .map((d, i) => {
-            return (
-              <div>
+        search.map((d, i) => {
+          return (
+            <Link to={`${routes.UserProfile}/${d.url_title}`}>
+              <div key={`${d.title} - ${d.summary}`}>
                 <div className="box">
                   <h3>{`${d.title}`}</h3>
                   <hr />
                   <h2>{`${d.first_name} ${d.last_name}`}</h2>
-                  <p>
-                    {d.summary.split("\n").map((summaryParagraph, i) => {
-                      return <p>{summaryParagraph}</p>;
-                    })}
-                  </p>
-                </div>
-
-                <div className="box">
-                  <p>{`Address: ${d.city}, ${d.state}, ${d.street}, ${d.zip}`}</p>
-                  <p>{`Phone: ${d.work_phone}`}</p>
-                  <p>{`Email: ${d.work_email}`}</p>
+                  <p>{`${d.summary.slice(0, 400)}...`}</p>
                 </div>
               </div>
-            );
-          })
-          .join("")
+            </Link>
+          );
+        })
       )}
+      <a
+        href={`${routes.UserProfileSearch}/${Number(props.match.params.index) + 1}/${props.match.params.search_query}`}
+      >
+        <button>next</button>
+      </a>
     </div>
   );
 }
