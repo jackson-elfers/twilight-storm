@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { routes, api } from "../../config";
 import { connect } from "../../redux";
+import { Profile } from "../../components";
 
 function Main(props) {
   const [profile, setProfile] = useState({});
@@ -37,33 +38,6 @@ function Main(props) {
     return <div></div>;
   }
 
-  return (
-    <div>
-      {props.globals.user.info._id === profile.owner_id ? (
-        <Link to={`${routes.UserProfileUpdate}/${props.match.params.url_title}`}>
-          <button>Edit</button>
-        </Link>
-      ) : (
-        <div style={{ display: "none" }}></div>
-      )}
-      <h1>User Profile</h1>
-      <hr />
-
-      <div className="box">
-        <h3>{`${profile.title}`}</h3>
-        <hr />
-        <h2>{`${profile.first_name} ${profile.last_name}`}</h2>
-        {profile.summary.split("\n").map((summaryParagraph, i) => {
-          return <p>{summaryParagraph}</p>;
-        })}
-      </div>
-
-      <div className="box">
-        <p>{`Address: ${profile.city}, ${profile.state}, ${profile.street}, ${profile.zip}`}</p>
-        <p>{`Phone: ${profile.work_phone}`}</p>
-        <p>{`Email: ${profile.work_email}`}</p>
-      </div>
-    </div>
-  );
+  return <Profile profile={profile} />;
 }
 export default connect(Main);

@@ -4,6 +4,7 @@ import axios from "axios";
 import check from "check-types";
 import { routes, api } from "../../config";
 import { connect } from "../../redux";
+import { Search } from "../../components";
 
 function Main(props) {
   const [search, setSearch] = useState([]);
@@ -72,18 +73,7 @@ function Main(props) {
         <div style={{ display: "none" }}></div>
       ) : (
         search.map((d, i) => {
-          return (
-            <Link to={`${routes.UserProfile}/${d.url_title}`}>
-              <div key={`${d.title} - ${d.summary}`}>
-                <div className="box">
-                  <h3>{`${d.title}`}</h3>
-                  <hr />
-                  <h2>{`${d.first_name} ${d.last_name}`}</h2>
-                  <p>{`${d.summary.slice(0, 400)}...`}</p>
-                </div>
-              </div>
-            </Link>
-          );
+          return <Search key={`${d.title} - ${d.summary}`} profile={d} />;
         })
       )}
       <a
