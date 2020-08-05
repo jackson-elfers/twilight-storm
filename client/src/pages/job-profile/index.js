@@ -38,6 +38,24 @@ function Main(props) {
     return <div></div>;
   }
 
-  return <Profile profile={profile} />;
+  return (
+    <div>
+      {props.globals.user.info._id === profile.owner_id ? (
+        <div>
+          <Link to={`${routes.JobProfileUpdate}/${props.match.params.url_title}`}>
+            <button>Edit</button>
+          </Link>
+          <Link to={`${routes.JobProfileDelete}/${props.match.params.url_title}`}>
+            <button>Delete</button>
+          </Link>
+        </div>
+      ) : (
+        <div style={{ display: "none" }}></div>
+      )}
+      <h1>Job Profile</h1>
+      <hr />
+      <Profile profile={profile} />
+    </div>
+  );
 }
 export default connect(Main);

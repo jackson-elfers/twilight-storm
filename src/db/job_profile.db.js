@@ -22,7 +22,7 @@ keywords
   }
 
   async create(data) {
-    await this.method.errors.job_profile.create(data);
+    await this.method.errors.user_profile.create(data);
 
     const short_title = data.title
       .split(" ")
@@ -38,6 +38,8 @@ uuid_to_bin(?),
 uuid_to_bin(?),
 current_timestamp(),
 current_timestamp(),
+?,
+?,
 ?,
 ?,
 ?,

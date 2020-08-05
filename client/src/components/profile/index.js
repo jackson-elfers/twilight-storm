@@ -6,16 +6,6 @@ import { connect } from "../../redux";
 function Main(props) {
   return (
     <div>
-      {props.globals.user.info._id === props.profile.owner_id ? (
-        <Link to={`${routes.UserProfileUpdate}/${props.match.params.url_title}`}>
-          <button>Edit</button>
-        </Link>
-      ) : (
-        <div style={{ display: "none" }}></div>
-      )}
-      <h1>User Profile</h1>
-      <hr />
-
       <div className="box">
         <h3>{`${props.profile.title}`}</h3>
         <hr />

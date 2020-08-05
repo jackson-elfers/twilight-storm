@@ -22,7 +22,7 @@ function Main(props) {
       keywords: form.keywords.value
     };
     try {
-      const response = await axios.put(`${process.env.REACT_APP_API}${api.job_profile.create}`, data);
+      const response = await axios.post(`${process.env.REACT_APP_API}${api.job_profile.create}`, data);
       if (response.data.error) {
         throw new Error(response.data.error.detail);
       }

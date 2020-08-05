@@ -29,6 +29,7 @@ function Main(props) {
       if (response.data.error) {
         throw new Error(response.data.error.detail);
       }
+
       props.history.push(`${routes.JobProfile}/${response.data.data.url_title}`);
     } catch (e) {
       props.actions.notice.message(e.message);
