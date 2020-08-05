@@ -12,7 +12,7 @@ module.exports = {
   UserProfileUpdate: "/profile/update",
   UserProfileSearch: "/profile/search",
   UploadResume: "/upload/resume",
-  JobProfile: "/job/:url_title",
+  JobProfile: "/job",
   JobProfileCreate: "/job/create",
   JobProfileUpdate: "/job/update",
   JobProfileDelete: "/job/delete",

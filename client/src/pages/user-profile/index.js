@@ -9,7 +9,7 @@ function Main(props) {
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
 
-  async function loadUserProfile() {
+  async function loadProfile() {
     const response = await axios.get(
       `${process.env.REACT_APP_API}${api.user_profile.read}/${props.match.params.url_title}`
     );
@@ -23,7 +23,7 @@ function Main(props) {
 
   async function load() {
     try {
-      await loadUserProfile();
+      await loadProfile();
       setLoading(false);
     } catch (e) {
       props.actions.notice.message(e.message);

@@ -78,9 +78,9 @@ module.exports.search = async function(req, res) {
 
 module.exports.remove = async function(req, res) {
   try {
-    check.assert(check.object(req.body), "expected object attached to req.body");
-    req.body._id = req.user._id;
-    await actions.job_profile.remove(req.body);
+    check.assert(check.object(req.params), "expected object attached to req.params");
+    req.params.owner_id = req.user._id;
+    await actions.job_profile.remove(req.params);
     res.clearCookie("Authorization");
     res.json(utils.api.send(null));
   } catch (e) {

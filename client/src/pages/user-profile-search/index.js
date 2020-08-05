@@ -52,7 +52,7 @@ function Main(props) {
 
   return (
     <div>
-      <h1>Search Profiles</h1>
+      <h1>Search User Profiles</h1>
       <hr />
       {Number(props.match.params.index) === 0 ? (
         <div style={{ display: "none" }}></div>

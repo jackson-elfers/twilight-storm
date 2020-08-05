@@ -51,12 +51,21 @@ module.exports = function(app) {
   );
   app.put(config.api.job_profile.update, utils.asyn.route(mw.jwt.secured), utils.asyn.route(job_profile.update));
   app.get(`${config.api.job_profile.search}/:index/:offset/:search_query`, utils.asyn.route(job_profile.search));
+  app.delete(
+    `${config.api.job_profile.remove}/:_id`,
+    utils.asyn.route(mw.jwt.secured),
+    utils.asyn.route(job_profile.remove)
+  );
 
   // file
   app.post(config.api.file.uploadResume, utils.asyn.route(mw.jwt.secured), utils.asyn.route(file.uploadResume));
   app.get(`${config.api.file.readByParentId}/:parent_id`, utils.asyn.route(file.readByParentId));
   app.get(`${config.api.file.readByStorageName}/:storage_name`, utils.asyn.route(file.readByStorageName));
-  app.delete(config.api.file.remove, utils.asyn.route(mw.jwt.secured), utils.asyn.route(file.remove));
+  app.delete(
+    `${config.api.file.remove}/:storage_name`,
+    utils.asyn.route(mw.jwt.secured),
+    utils.asyn.route(file.remove)
+  );
 
   // client
   app.get("/", client.home);
