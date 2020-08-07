@@ -43,12 +43,12 @@ module.exports = function(app) {
 
   // job_profile
   app.post(config.api.job_profile.create, utils.asyn.route(mw.jwt.secured), utils.asyn.route(job_profile.create));
-  app.get(`${config.api.job_profile.read}/:url_title`, utils.asyn.route(job_profile.read));
   app.get(
     config.api.job_profile.readByOwnerId,
     utils.asyn.route(mw.jwt.secured),
     utils.asyn.route(job_profile.readByOwnerId)
   );
+  app.get(`${config.api.job_profile.read}/:url_title`, utils.asyn.route(job_profile.read));
   app.put(config.api.job_profile.update, utils.asyn.route(mw.jwt.secured), utils.asyn.route(job_profile.update));
   app.get(`${config.api.job_profile.search}/:index/:offset/:search_query`, utils.asyn.route(job_profile.search));
   app.delete(

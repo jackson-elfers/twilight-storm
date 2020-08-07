@@ -22,12 +22,13 @@ import {
   UserProfileSearch,
   UploadResume,
   JobProfile,
+  JobProfileList,
   JobProfileCreate,
   JobProfileUpdate,
   JobProfileDelete,
   JobProfileSearch
 } from "./pages";
-import { Status, Scroll, SetUser, Notice } from "./components";
+import { Status, Scroll, SetUser, Notice, SearchBar } from "./components";
 import { routes } from "./config";
 import * as serviceWorker from "./serviceWorker";
 
@@ -37,6 +38,7 @@ const routing = (
       <SetUser />
       <Scroll>
         <Status />
+        <SearchBar />
         <Notice>
           <Switch>
             <Route exact path={routes.Home} component={Home} />
@@ -53,6 +55,7 @@ const routing = (
             <Route exact path={`${routes.UserProfileSearch}/:index/:search_query`} component={UserProfileSearch} />
             <Route exact path={`${routes.UploadResume}/:url_title`} component={UploadResume} />
             <Route exact path={`${routes.JobProfileCreate}`} component={JobProfileCreate} />
+            <Route exact path={routes.JobProfileList} component={JobProfileList} />
             <Route exact path={`${routes.JobProfile}/:url_title`} component={JobProfile} />
             <Route exact path={`${routes.JobProfileUpdate}/:url_title`} component={JobProfileUpdate} />
             <Route exact path={`${routes.JobProfileDelete}/:url_title`} component={JobProfileDelete} />

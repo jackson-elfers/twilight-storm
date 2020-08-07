@@ -15,3 +15,5 @@ export { default as Scroll } from "./scroll";
 export { default as Profile } from "./profile";
 
 export { default as Search } from "./search";
+
+export { default as SearchBar } from "./search-bar";

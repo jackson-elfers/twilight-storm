@@ -5,7 +5,7 @@ import { connect } from "../../redux";
 
 function Main(props) {
   return (
-    <Link to={`${routes.UserProfile}/${props.profile.url_title}`}>
+    <Link to={`${props.link}`}>
       <div>
         <div className="box">
           <h3>{`${props.profile.title}`}</h3>

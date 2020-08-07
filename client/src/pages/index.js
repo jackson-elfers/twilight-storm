@@ -28,6 +28,8 @@ export { default as UploadResume } from "./upload-resume";
 
 export { default as JobProfile } from "./job-profile";
 
+export { default as JobProfileList } from "./job-profile-list";
+
 export { default as JobProfileCreate } from "./job-profile-create";
 
 export { default as JobProfileUpdate } from "./job-profile-update";

@@ -29,7 +29,7 @@ function Main(props) {
       if (response.data.error) {
         throw new Error(response.data.error.detail);
       }
-      props.history.push(`${routes.UserProfile}/${response.data.data.url_title}`);
+      window.location.href = `${routes.UserProfile}/${response.data.data.url_title}`;
     } catch (e) {
       props.actions.notice.message(e.message);
     }

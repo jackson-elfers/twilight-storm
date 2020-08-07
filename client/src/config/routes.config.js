@@ -13,6 +13,7 @@ module.exports = {
   UserProfileSearch: "/profile/search",
   UploadResume: "/upload/resume",
   JobProfile: "/job",
+  JobProfileList: "/job/list",
   JobProfileCreate: "/job/create",
   JobProfileUpdate: "/job/update",
   JobProfileDelete: "/job/delete",

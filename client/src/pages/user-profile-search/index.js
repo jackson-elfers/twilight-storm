@@ -66,14 +66,14 @@ function Main(props) {
         </a>
       )}
       <form id="formOne" onSubmit={getSearch}>
-        <input type="text" name="search_query" placeholder="search" />
-        <input type="submit" value="search" />
+        <input style={{ display: "inline" }} type="text" name="search_query" placeholder="search" />
+        <input style={{ display: "inline" }} type="submit" value="Search" />
       </form>
       {loading ? (
         <div style={{ display: "none" }}></div>
       ) : (
         search.map((d, i) => {
-          return <Search key={`${d.title} - ${d.summary}`} profile={d} />;
+          return <Search key={`${d.title} - ${d.summary}`} profile={d} link={`${routes.UserProfile}/${d.url_title}`} />;
         })
       )}
       <a

@@ -18,6 +18,11 @@ module.exports = class {
     return await this.method.db.job_profile.read(data);
   }
 
+  async readByOwnerId(data) {
+    await this.method.errors.job_profile.readByOwnerId(data);
+    return await this.method.db.job_profile.readByOwnerId(data);
+  }
+
   async search(data) {
     await this.method.errors.job_profile.search(data);
     return await this.method.db.job_profile.search(data);

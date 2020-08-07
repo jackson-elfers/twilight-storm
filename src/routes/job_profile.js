@@ -37,8 +37,8 @@ module.exports.read = async function(req, res) {
 
 module.exports.readByOwnerId = async function(req, res) {
   try {
-    check.assert(check.object(req.params), "expected object attached to req.params");
-    res.json(utils.api.send((await actions.job_profile.readByOwnerId(req.params)).results));
+    req.body.owner_id = req.user._id;
+    res.json(utils.api.send((await actions.job_profile.readByOwnerId(req.body)).results));
   } catch (e) {
     console.log(e);
     res.json(

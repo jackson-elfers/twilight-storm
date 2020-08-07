@@ -87,6 +87,19 @@ where url_title = ?;
     return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
   }
 
+  async readByOwnerId(data) {
+    await this.method.errors.job_profile.readByOwnerId(data);
+    const query = `
+select
+${this._columns}
+from job_profile
+where owner_id = uuid_to_bin(?);
+`;
+
+    const params = [data.owner_id];
+    return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
+  }
+
   async update(data) {
     await this.method.errors.job_profile.update(data);
 
@@ -151,7 +164,7 @@ where owner_id = uuid_to_bin(?) and _id = uuid_to_bin(?);
     const query = `
 select
 ${this._columns}
-from user_profile
+from job_profile
 where ${where}
 order by created_at desc limit ${index * offset}, ${offset};
 `;

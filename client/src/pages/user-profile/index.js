@@ -41,9 +41,17 @@ function Main(props) {
   return (
     <div>
       {props.globals.user.info._id === profile.owner_id ? (
-        <Link to={`${routes.UserProfileUpdate}/${props.match.params.url_title}`}>
-          <button>Edit</button>
-        </Link>
+        <div>
+          <Link to={`${routes.UserProfileUpdate}/${props.match.params.url_title}`}>
+            <button>Edit Profile</button>
+          </Link>
+          <Link to={`${routes.JobProfileCreate}`}>
+            <button>Create Job</button>
+          </Link>
+          <Link to={`${routes.JobProfileList}`}>
+            <button>Job List</button>
+          </Link>
+        </div>
       ) : (
         <div style={{ display: "none" }}></div>
       )}

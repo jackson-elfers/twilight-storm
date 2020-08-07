@@ -19,7 +19,7 @@ function Main(props) {
       if (response.data.error) {
         throw new Error(response.data.error.detail);
       }
-      props.history.push(routes.Home);
+      props.history.push(routes.JobProfileList);
     } catch (e) {
       props.actions.notice.message(e.message);
     }

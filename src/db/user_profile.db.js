@@ -83,7 +83,7 @@ url_title
 from user_profile
 where owner_id = uuid_to_bin(?);
 `;
-    const params = [data.url_title];
+    const params = [data.owner_id];
     return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
   }
 

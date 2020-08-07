@@ -1,19 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { routes } from "../../config";
+import { routes, api } from "../../config";
 import { connect } from "../../redux";
+import axios from "axios";
+
+const nav = { float: "right", backgroundColor: "rgba(0, 0, 0, 0)", padding: "2px" };
+
+const Profile = connect(function(props) {
+  const [profile, setProfile] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  async function loadProfile() {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}${api.user_profile.resolve}/${props.globals.user.info._id}`
+    );
+    if (response.data.error) {
+      throw new Error(response.data.error.detail);
+    } else if (response.data.data.length === 0) {
+      return;
+    }
+    setProfile(response.data.data[0]);
+  }
+
+  async function load() {
+    try {
+      await loadProfile();
+      setLoading(false);
+    } catch (e) {
+      props.actions.notice.message(e.message);
+    }
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  if (loading) {
+    return <div></div>;
+  }
+
+  return (
+    <Link to={`${routes.UserProfile}/${profile.url_title}`}>
+      <button style={nav}>profile</button>
+    </Link>
+  );
+});
 
 function Nav(props) {
-  const nav = { float: "right", backgroundColor: "rgba(0, 0, 0, 0)", padding: "2px" };
   if (props.user) {
     return (
       <div>
         <Link to={routes.Menu}>
           <button style={nav}>menu</button>
         </Link>
-        <Link to={routes.Dashboard}>
-          <button style={nav}>{`hi ${props.user.email.slice(0, 12)}...`}</button>
-        </Link>
+        <Profile />
       </div>
     );
   } else {
@@ -42,7 +82,7 @@ class Main extends React.Component {
     return (
       <div>
         <Link to={routes.Home}>
-          <h1>Twilight Storm</h1>
+          <h1>Ebenee</h1>
         </Link>
         <div style={{ height: "50px" }}>
           <Nav user={this.props.globals.user.info} />
