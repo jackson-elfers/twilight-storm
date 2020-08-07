@@ -5,6 +5,7 @@ const db = require("./src/db");
 const app = express();
 const server = require("http").Server(app);
 const sockets = require("./src/sockets");
+const pingmydyno = require("pingmydyno");
 
 async function main() {
   // connect database
@@ -23,6 +24,7 @@ async function main() {
   console.log("sockets: connected");
   // start server
   server.listen(process.env.PORT, function() {
+    pingmydyno("https://ebenee.herokuapp.com");
     require("./src")(app);
     console.log("server: connected");
     console.log("port: " + process.env.PORT);
