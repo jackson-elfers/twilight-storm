@@ -40,7 +40,7 @@ function Main(props) {
 
   return (
     <div>
-      {props.globals.user.info._id === profile.owner_id ? (
+      {props.globals.user.info && props.globals.user.info._id === profile.owner_id ? (
         <div>
           <Link to={`${routes.JobProfileUpdate}/${props.match.params.url_title}`}>
             <button>Edit</button>
