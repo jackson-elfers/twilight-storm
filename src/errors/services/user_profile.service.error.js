@@ -9,6 +9,8 @@ module.exports = class {
 
   async read(data) {}
 
+  async readByOwnership(data) {}
+
   async update(data) {}
 
   async search(data) {}

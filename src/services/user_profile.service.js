@@ -18,6 +18,11 @@ module.exports = class {
     return await this.method.db.user_profile.read(data);
   }
 
+  async readByOwnership(data) {
+    await this.method.errors.user_profile.readByOwnership(data);
+    return await this.method.db.user_profile.readByOwnership(data);
+  }
+
   async update(data) {
     await this.method.errors.user_profile.update(data);
     return await this.method.db.user_profile.update(data);

@@ -5,8 +5,8 @@ const check = require("check-types");
 module.exports.uploadResume = async function(req, res) {
   try {
     const file_meta = JSON.parse(req.headers.file_meta);
-    const data = { body: req, owner_id: file_meta._id, file_name: file_meta.file_name };
-    const response = await actions.files.uploadResume(data);
+    const data = { body: req, parent_id: file_meta.parent_id, owner_id: req.user._id, file_name: file_meta.file_name };
+    const response = await actions.file.uploadResume(data);
     res.json(utils.api.send({ storage_name: response.info.storage_name }));
   } catch (e) {
     console.log(e);

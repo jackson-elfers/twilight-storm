@@ -99,6 +99,18 @@ where url_title = ?;
     return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
   }
 
+  async readByOwnership(data) {
+    await this.method.errors.user_profile.readByOwnership(data);
+    const query = `
+select
+${this._columns}
+from user_profile
+where _id = uuid_to_bin(?) && owner_id = uuid_to_bin(?);
+`;
+    const params = [data._id, data.owner_id];
+    return await this.method.utils.db.query(this.method.sqlstring.format(query, params));
+  }
+
   async update(data) {
     await this.method.errors.user_profile.update(data);
 

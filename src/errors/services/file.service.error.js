@@ -7,7 +7,11 @@ module.exports = class {
 
   async _s3Delete(data) {}
 
-  async uploadResume(data) {}
+  async uploadResume(data) {
+    if (this.method.mime.lookup(data.file_name) !== "application/pdf") {
+      throw new Error("resume must be of type application/pdf");
+    }
+  }
 
   async readByParentId(data) {}
 

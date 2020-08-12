@@ -9,12 +9,14 @@ const utils = require("../../utils");
 const config = require("../../config");
 const check = require("check-types");
 const emailValidator = require("email-validator");
+const mime = require("mime-types");
 
 const method = {
   check: check,
   utils: utils,
   config: config,
-  emailValidator: emailValidator
+  emailValidator: emailValidator,
+  mime: mime
 };
 
 module.exports.user = new User({ method: method });
