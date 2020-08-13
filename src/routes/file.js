@@ -22,7 +22,7 @@ module.exports.uploadResume = async function(req, res) {
 module.exports.readByParentId = async function(req, res) {
   try {
     check.assert(check.object(req.body), "expected object attached to req.body");
-    res.json(utils.api.send((await actions.files.readByOwnerId(req.params)).results));
+    res.json(utils.api.send((await actions.file.readByParentId(req.params)).results));
   } catch (e) {
     console.log(e);
     res.json(
@@ -37,7 +37,7 @@ module.exports.readByParentId = async function(req, res) {
 module.exports.readByStorageName = async function(req, res) {
   try {
     check.assert(check.object(req.params), "expected object attached to req.params");
-    (await actions.files.readByStorageName(req.params)).pipe(res);
+    (await actions.file.readByStorageName(req.params)).pipe(res);
   } catch (e) {
     console.log(e);
     res.json(
@@ -52,7 +52,8 @@ module.exports.readByStorageName = async function(req, res) {
 module.exports.remove = async function(req, res) {
   try {
     check.assert(check.object(req.params), "expected object attached to req.params");
-    await actions.files.remove(req.params);
+    req.params.owner_id = req.user._id;
+    await actions.file.remove(req.params);
     res.json(utils.api.send(null));
   } catch (e) {
     console.log(e);

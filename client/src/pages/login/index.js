@@ -15,7 +15,7 @@ function Main(props) {
         throw new Error(response.data.error.detail);
       }
       await props.actions.user.set();
-      props.history.push(routes.Account);
+      props.history.push(routes.Home);
     } catch (e) {
       props.actions.notice.message(e.message);
     }

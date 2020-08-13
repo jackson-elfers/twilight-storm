@@ -22,7 +22,7 @@ module.exports = class {
 
   async readByStorageName(data) {
     await this.method.errors.file.readByStorageName(data);
-    return await this.method.services.files.readByStorageName(data);
+    return await this.method.services.file.readByStorageName(data);
   }
 
   async remove(data) {

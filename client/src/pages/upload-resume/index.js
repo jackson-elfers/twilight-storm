@@ -43,6 +43,7 @@ function Main(props) {
       if (response.data.error) {
         throw new Error(response.data.error.detail);
       }
+      props.history.push(`${routes.UserProfile}/${props.match.params.url_title}`);
     } catch (error) {
       props.actions.notice.message(error.message);
       setLoading(false);
