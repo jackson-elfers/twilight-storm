@@ -30,6 +30,7 @@ module.exports = class {
 
   async remove(data) {
     await this.method.errors.job_profile.remove(data);
+    await this.method.service.file.removeByParentId({ parent_id: data._id });
     return await this.method.services.job_profile.remove(data);
   }
 };

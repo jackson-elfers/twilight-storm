@@ -53,6 +53,7 @@ module.exports = class {
 
   async unregister(data) {
     await this.method.errors.user.unregister(data);
+    await this.method.service.file.removeByOwnerId({ owner_id: data._id });
     await this.method.services.user.unregister(data);
   }
 };
