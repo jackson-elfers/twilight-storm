@@ -10,8 +10,7 @@ module.exports = class {
       next();
     } catch (e) {
       console.log(e);
-      res.status(401);
-      res.json(utils.api.error({ status: 401, detail: "This route is protected." }));
+      res.json(this.method.utils.api.error({ status: 401, detail: "This route is protected." }));
     }
   }
 };
