@@ -40,9 +40,9 @@ const Profile = connect(function(props) {
   }
 
   return (
-    <Link to={`${routes.UserProfile}/${profile.url_title}`}>
+    <a href={`${routes.UserProfile}/${profile.url_title}`}>
       <button style={nav}>{`${props.globals.user.info.email.slice(0, 4)}'s profile`}</button>
-    </Link>
+    </a>
   );
 });
 

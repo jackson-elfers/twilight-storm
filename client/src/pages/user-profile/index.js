@@ -36,6 +36,8 @@ function Main(props) {
     const responseThree = await axios.get(`${process.env.REACT_APP_API}${api.admin.validate}`);
     if (!responseThree.data.error) {
       setAdmin(true);
+    } else {
+      setAdmin(false);
     }
   }
 
@@ -61,8 +63,9 @@ function Main(props) {
       if (response.data.error) {
         throw new Error(response.data.error.detail);
       }
+      props.actions.user.clear();
       await props.actions.user.set();
-      window.location.reload();
+      await load();
     } catch (e) {
       props.actions.notice.message(e.message);
     }
@@ -89,6 +92,8 @@ function Main(props) {
     <div>
       {admin ? (
         <div className="box">
+          <h3>Admin Options</h3>
+          <hr />
           <button onClick={adminLogin}>Login</button>
         </div>
       ) : (
