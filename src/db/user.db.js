@@ -42,7 +42,12 @@ where email = ?;
     await this.method.errors.user.readSingleId(data);
     const query = `
 select
-email
+bin_to_uuid(_id) _id,
+created_at,
+updated_at,
+login_at,
+email,
+password
 from user
 where _id = uuid_to_bin(?);
 `;

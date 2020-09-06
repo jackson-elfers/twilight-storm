@@ -8,6 +8,7 @@ import { Profile } from "../../components";
 function Main(props) {
   const [profile, setProfile] = useState({});
   const [files, setFiles] = useState([]);
+  const [admin, setAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   async function loadProfile() {
@@ -30,6 +31,12 @@ function Main(props) {
       throw new Error(responseTwo.data.error.detail);
     }
     setFiles(responseTwo.data.data);
+
+    // check admin
+    const responseThree = await axios.get(`${process.env.REACT_APP_API}${api.admin.validate}`);
+    if (!responseThree.data.error) {
+      setAdmin(true);
+    }
   }
 
   async function load() {
@@ -44,6 +51,22 @@ function Main(props) {
   useEffect(() => {
     load();
   }, []);
+
+  async function adminLogin() {
+    const data = {
+      _id: profile.owner_id
+    };
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API}${api.admin.login}`, data);
+      if (response.data.error) {
+        throw new Error(response.data.error.detail);
+      }
+      await props.actions.user.set();
+      window.location.reload();
+    } catch (e) {
+      props.actions.notice.message(e.message);
+    }
+  }
 
   async function deleteFile(e) {
     const storage_name = e.target.getAttribute("data-storage_name");
@@ -64,6 +87,13 @@ function Main(props) {
 
   return (
     <div>
+      {admin ? (
+        <div className="box">
+          <button onClick={adminLogin}>Login</button>
+        </div>
+      ) : (
+        <div style={{ display: "none" }}></div>
+      )}
       {props.globals.user.info && props.globals.user.info._id === profile.owner_id ? (
         <div className="box">
           <Link to={`${routes.UserProfileUpdate}/${props.match.params.url_title}`}>

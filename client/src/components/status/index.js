@@ -41,7 +41,7 @@ const Profile = connect(function(props) {
 
   return (
     <Link to={`${routes.UserProfile}/${profile.url_title}`}>
-      <button style={nav}>profile</button>
+      <button style={nav}>{`${props.globals.user.info.email.slice(0, 4)}'s profile`}</button>
     </Link>
   );
 });
@@ -50,10 +50,12 @@ function Nav(props) {
   if (props.user) {
     return (
       <div>
-        <Link to={routes.Menu}>
-          <button style={nav}>menu</button>
-        </Link>
-        <Profile />
+        <div>
+          <Link to={routes.Menu}>
+            <button style={nav}>menu</button>
+          </Link>
+          <Profile />
+        </div>
       </div>
     );
   } else {
